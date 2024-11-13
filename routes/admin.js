@@ -6,13 +6,15 @@ const products = [];
 const router = express.Router();
 
 router.get('/add-products', (req, res) => {
-      res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
-})
+  res.render('add-product', { pageTitle: "Add Product" });
+});
 
 router.post('/add-products', (req, res) => {
-      products.push({title: req.body.title});
-      res.redirect('/');
-})
+  const { title, cost, desc } = req.body;
+  products.push({ title, cost, desc });
+  
+  res.redirect('/');
+});
 
 exports.routes = router;
 exports.product = products;
